@@ -3,30 +3,26 @@ extends Node2D
 
 var cur_pos = Vector2()
 var next_pos = Vector2()
-var red_block
-var yellow_block
-var blue_block
+var block
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	red_block = load("res://red_block.tscn")
-	yellow_block = load("res://yellow_block.tscn")
-	blue_block = load("res://blue_block.tscn")
-	cur_pos = Vector2(3, 1)
+	block = load("res://blocks.tscn")
+	cur_pos = Vector2(12, 4)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if(get_node("ball").is_playing == true):
-		generate_blocks()
+	pass
 	
 func generate_blocks():
-	#var i = 1
 	for i in range(1, 30):
-		if(i <= 10):
-			var red = red_block.instance()
+		if(i <= 9):
+			var red = block.instance()
 			red.position = cur_pos
 			red.scale = Vector2(2, 2)
 			add_child(red)
-			next_pos.x = cur_pos.x + 6
+			red.connect("block_hit", self, "on_block_hit")
+			red.add_to_group("blocks")
+			next_pos.x = cur_pos.x + 27
+			next_pos.y = cur_pos.y
 			cur_pos = next_pos
-		
 	

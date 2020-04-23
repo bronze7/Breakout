@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://paddle.tscn" type="PackedScene" id=1]
 [ext_resource path="res://ball.tscn" type="PackedScene" id=2]
 [ext_resource path="res://centerfont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://center.gd" type="Script" id=4]
 [ext_resource path="res://game.gd" type="Script" id=5]
+[ext_resource path="res://blocks.tscn" type="PackedScene" id=6]
 
 [node name="game" type="Node2D"]
 script = ExtResource( 5 )
@@ -31,5 +32,7 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="center"]
 wait_time = 0.6
 autostart = true
+
+[node name="blocks" parent="." instance=ExtResource( 6 )]
 [connection signal="body_entered" from="paddle" to="ball" method="_on_paddle_body_entered"]
 [connection signal="timeout" from="center/Timer" to="center" method="_on_Timer_timeout"]
